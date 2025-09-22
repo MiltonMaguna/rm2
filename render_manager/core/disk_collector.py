@@ -17,6 +17,52 @@ from render_manager.render.tokens import (
 log = get_stream_logger("RenderManager")
 
 
+def collect_render_layers_by_role(path: str) -> dict[str, List[Render]]:
+    """return a dictionary of Render objects grouped by role
+    Args:
+        path (str): path to search on shot frames
+    Returns:
+        dict: dictionary with RENDER_ROLE keys and list of Render objects as values
+    """
+    if not os.path.exists(path):
+        log.warning(f"Path does not exist: {path}")
+        return {}
+
+    # Initialize dictionary with empty lists for each role
+    render_layers_by_role = {role: [] for role in RENDER_ROLE}
+
+    layers = _get_valid_render_layers(path)
+
+    for layer in layers:
+        # Extract role from layer name (second part after splitting by '_')
+        layer_parts = layer.split("_")
+        if len(layer_parts) < 2:
+            log.warning(f"Invalid layer format: {layer}")
+            continue
+
+        role = layer_parts[1]
+        if role not in RENDER_ROLE:
+            log.warning(f"Invalid role found: {role}")
+            continue
+
+        for name in _get_render_layer_names(path, layer):
+            base_path = os.path.join(path, name)
+            version_paths = _get_all_version_paths(base_path)
+
+            # filter out invalid paths or folders
+            if not version_paths:
+                log.warning(f"No valid versions found for: {base_path}")
+                continue
+
+            # collect aovs and data for all versions of this render layer
+            for version_path in version_paths:
+                aovs = _get_aovs(version_path, name)
+                render = Render(path=version_path, name=name, aovs=aovs)
+                render_layers_by_role[role].append(render)
+
+    return render_layers_by_role
+
+
 def collect_render_layers_from(path: str) -> List[Render]:
     """return a list of Render objects
     Args:
@@ -100,13 +146,13 @@ def _get_render_layer_names(path: str, layer: str) -> list:
     return render_layer_names
 
 
-def _get_last_version_path(path_layer: str) -> str:
-    """get the last version folder of a render layer with LGT in the name
-        if the folder is empty, get the previous one
+def _get_all_version_paths(path_layer: str) -> List[str]:
+    """get all valid version folders of a render layer
     Args:
-        path_layer (str): full path of last render version
+        path_layer (str): full path of render layer
+    Returns:
+        List[str]: list of all valid version paths (non-empty)
     """
-
     versions = []
     for suffix in RENDER_PREFIX_VERSION:
         for _path in os.listdir(path_layer):
@@ -115,13 +161,24 @@ def _get_last_version_path(path_layer: str) -> str:
 
     versions.sort(reverse=True)
 
+    valid_paths = []
     for folder in versions:
         path = os.path.join(path_layer, folder)
 
-        if check_for_empty_subfolders(path):
-            continue
+        if not check_for_empty_subfolders(path):
+            valid_paths.append(path.replace("\\", "/"))
 
-        return path.replace("\\", "/")
+    return valid_paths
+
+
+def _get_last_version_path(path_layer: str) -> str:
+    """get the last version folder of a render layer with LGT in the name
+        if the folder is empty, get the previous one
+    Args:
+        path_layer (str): full path of last render version
+    """
+    all_versions = _get_all_version_paths(path_layer)
+    return all_versions[0] if all_versions else None
 
 
 def _get_aovs(path: str, name: str) -> list:

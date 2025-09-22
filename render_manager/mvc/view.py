@@ -8,9 +8,9 @@ from PySide2.QtGui import QIcon, QCursor
 from qt_log.stream_log import get_stream_logger
 from backpack.folder_utils import browse_folder
 
-from Test_RenderManager.render_manager.mvc.config import MODEL_DATA
-from Test_RenderManager.render_manager.mvc.model import RenderTableModel
-from Test_RenderManager.render_manager.mvc.libs.edit_render_dialog import (
+from rm2.render_manager.mvc.config import MODEL_DATA
+from rm2.render_manager.mvc.model import RenderTableModel
+from rm2.render_manager.mvc.libs.edit_render_dialog import (
     EditRenderDialog,
 )
 from CG_Template.cg_template.main import run
@@ -86,6 +86,21 @@ class RendersView:
         edit.triggered.connect(self.edit_callback)
         # select version
 
+    def edit_callback(self):
+        """editar render seleccionado"""
+        selection = self.get_view_selection()
+        if not selection:
+            log.warning("Nothing Selected!")
+            return
+
+        if len(selection) > 1:
+            log.warning("Select only one render to edit!")
+            return
+
+        render = selection[0]
+        log.debug(f"Edit callback: {render}")
+        self.open_edit_dialog(render)
+
     def open_edit_dialog(self, render):
         """Abrir diálogo para seleccionar versión"""
         log.debug(f"Render: {render.name()}")
@@ -142,21 +157,6 @@ class RendersView:
         """opens render layers location on explorer"""
         if self.rl:
             browse_folder(self.rl.path())
-
-    def edit_callback(self):
-        """editar render seleccionado"""
-        selection = self.get_view_selection()
-        if not selection:
-            log.warning("Nothing Selected!")
-            return
-
-        if len(selection) > 1:
-            log.warning("Select only one render to edit!")
-            return
-
-        render = selection[0]
-        log.debug(f"Edit callback: {render}")
-        self.open_edit_dialog(render)
 
     def get_last_version(self, renders):
         """Get the latest version of each render class from a collection of renders.

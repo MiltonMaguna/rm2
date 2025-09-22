@@ -80,9 +80,9 @@ class RenderManager(QtWidgets.QMainWindow):
         self.ui.cbox_shot.clear()
         self.ui.cbox_shot.addItem(f"{shot.parent_name()}-{shot.name()}")
 
-        json_file_path = collect_by_shot_with_json(
-            sequence_name, shot_name, PLUGIN, OUTPUT_DIR
-        )
+        # json_file_path = collect_by_shot_with_json(
+        # sequence_name, shot_name, PLUGIN, OUTPUT_DIR
+        # )
         # self.controller.reset_db(self.load_json())
 
         self._path = shot.path_renders_cg()
@@ -92,7 +92,7 @@ class RenderManager(QtWidgets.QMainWindow):
         # if self.path():
         #    self.controller.reset_db(self.path())
 
-        self.controller.reset_db(json_file_path)
+        self.controller.reset_db(self.path())
 
     def path(self):
         """returns render path for current shot"""

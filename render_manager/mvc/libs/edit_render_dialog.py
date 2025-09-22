@@ -10,7 +10,7 @@ from PySide2.QtWidgets import (
 )
 from PySide2.QtCore import QAbstractTableModel, Qt, QModelIndex
 from PySide2.QtGui import QFont
-from Test_RenderManager.render_manager.core.dl_collector_job.libs.render.render_layer import (
+from rm2.render_manager.core.dl_collector_job.libs.render.render_layer import (
     Render,
 )
 from qt_log.stream_log import get_stream_logger
@@ -22,7 +22,7 @@ class VersionTableModel(QAbstractTableModel):
     def __init__(self, versions):
         super().__init__()
         self.versions = versions
-        self.headers = ["Version", "User", "Progress", "Frames", "Path"]
+        self.headers = ["Version", "Frames", "Path"]
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.versions)
@@ -40,13 +40,9 @@ class VersionTableModel(QAbstractTableModel):
         if role == Qt.DisplayRole:
             if column == 0:  # Version
                 return str(version.int_version())
-            elif column == 1:  # User
-                return version.user()
-            elif column == 2:  # Progress
-                return version.progress_bar()
-            elif column == 3:  # Frames
+            elif column == 1:  # Frames
                 return version.frame_range()
-            elif column == 4:  # Path
+            elif column == 2:  # Path
                 return version.path()
 
         elif role == Qt.FontRole:

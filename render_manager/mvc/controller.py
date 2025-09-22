@@ -8,18 +8,21 @@ from qt_log.stream_log import get_stream_logger
 from backpack.test_utils import time_function_decorator
 from backpack.cache import timed_lru_cache
 
-from Test_RenderManager.render_manager.mvc.view import RendersView
+from rm2.render_manager.mvc.view import RendersView
 
-# from Test_RenderManager.render_manager.core.disk_collector import collect_render_layers_from
-from Test_RenderManager.render_manager.core.dl_collector_job.deadline_collector import (
-    collect_render_layers_from_deadline,
+from rm2.render_manager.core.disk_collector import (
+    collect_render_layers_by_role,
 )
-from Test_RenderManager.render_manager.render.render_states import SYNC
+
+# from rm2.render_manager.core.dl_collector_job.deadline_collector import (
+# collect_render_layers_from_deadline,
+# )
+from rm2.render_manager.render.render_states import SYNC
 
 log = get_stream_logger("RenderManager")
 
 # json_file_path = (
-# r"D:\repo\Test_RenderManager\tests\test_data\jobs_KIT_0070_MayaBatch.json"
+# r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
 # )
 
 
@@ -46,13 +49,13 @@ class Controller:
 
     @time_function_decorator
     @timed_lru_cache(seconds=30)
-    def reset_db(self, json_file_path: str):
+    def reset_db(self, path):
         """clear find cache for shaders"""
         log.process("Reloading Renders....")
-        # self._renders = collect_render_layers_from(path)
-        self._renders = collect_render_layers_from_deadline(
-            self.load_json(json_file_path)
-        )
+        self._renders = collect_render_layers_by_role(path)
+        # self._renders = collect_render_layers_from_deadline(
+        # self.load_json(json_file_path)
+        # )
         # log.info(f"Done. {len(self.renders())} Renders's found")
         self.view.update_view(self.renders())
 
