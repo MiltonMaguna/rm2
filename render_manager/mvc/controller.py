@@ -105,17 +105,3 @@ class Controller:
         except ImportError:
             print("❌ ImportError: RenderCollector module not found.")
             return {}
-
-    def edit_callback(self):
-        """editar render seleccionado"""
-        selection = self.get_view_selection()
-        if not selection:
-            log.warning("Nothing Selected!")
-            return
-
-        if len(selection) > 1:
-            log.warning("Select only one render to edit!")
-            return
-
-        render = selection[0]
-        self.view.open_edit_dialog(render)

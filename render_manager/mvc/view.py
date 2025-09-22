@@ -5,6 +5,7 @@
 from PySide2 import QtCore
 from PySide2.QtWidgets import QMenu, QAction, QTableView, QMainWindow, QDialog
 from PySide2.QtGui import QIcon, QCursor
+from PySide2.QtCore import Qt
 from qt_log.stream_log import get_stream_logger
 from backpack.folder_utils import browse_folder
 
@@ -82,26 +83,9 @@ class RendersView:
         browse = self._add_menu_action(":/browse", "Browse Folder")
         browse.triggered.connect(self.browse_render_layer)
         self.menu.popup(QCursor.pos())
-        edit = self._add_menu_action(":/edit", "edit Render")
-        edit.triggered.connect(self.edit_callback)
         select_version = self._add_menu_action(":/version", "Select Version")
         select_version.triggered.connect(self.version_selector_callback)
         # select version
-
-    def edit_callback(self):
-        """editar render seleccionado"""
-        selection = self.get_view_selection()
-        if not selection:
-            log.warning("Nothing Selected!")
-            return
-
-        if len(selection) > 1:
-            log.warning("Select only one render to edit!")
-            return
-
-        render = selection[0]
-        log.debug(f"Edit callback: {render}")
-        self.open_edit_dialog(render)
 
     def version_selector_callback(self):
         """Seleccionar versión del render sin modificar el original"""
@@ -124,28 +108,6 @@ class RendersView:
             )
         else:
             log.info("Version selection cancelled")
-
-    def open_edit_dialog(self, render):
-        """Abrir diálogo para seleccionar versión"""
-        log.debug(f"Render: {render.name()}")
-        log.debug(f"Parent Render: {self.parent.renders()}")
-
-        dialog = EditRenderDialog(render, self.parent.renders(), None)
-        if dialog.exec_() == QDialog.Accepted:
-            # Aplicar cambios de forma segura DESPUÉS de cerrar el diálogo
-            changes_applied = dialog.apply_changes_safely()
-
-            if changes_applied:
-                log.debug(f"Nueva versión: {render.int_version()}")
-                log.debug(f"Nuevo usuario: {render.user()}")
-                log.debug(f"Nuevo progreso: {render.progress_bar()}")
-                log.debug(f"Nuevos frames: {render.frame_range()}")
-                log.debug(f"Nueva ruta: {render.path()}")
-
-                # Actualizar la vista después del cambio
-                self.update_view(self.parent.renders())
-
-        log.info(f"Updated {render.name()} to version {render.int_version()}")
 
     def open_version_selector_dialog(self, render):
         """Abrir diálogo para seleccionar versión sin modificar el render original"""
@@ -176,21 +138,39 @@ class RendersView:
     def _update_render_in_view(self, original_render, new_render):
         """Actualizar el render en la vista con la nueva versión seleccionada"""
         # Encontrar y reemplazar el render en el modelo actual
+        row_updated = -1
         for i, current_render in enumerate(self.model.renders):
             if current_render.name() == original_render.name():
                 self.model.renders[i] = new_render
+                row_updated = i
                 log.debug(
                     f"Updated render at index {i}: {new_render.name()} v{new_render.int_version()}"
                 )
+                log.debug(f"Updated status: {new_render.status_text()}")
                 break
 
-        # Emitir señal de cambio de datos para refrescar la vista
-        self.model.dataChanged.emit(
-            self.model.index(0, 0),
-            self.model.index(
-                self.model.rowCount(None) - 1, self.model.columnCount(None) - 1
-            ),
-        )
+        # Si encontramos el render, emitir señales específicas para actualizar la vista
+        if row_updated >= 0:
+            # Emitir señal para la fila específica que cambió
+            top_left = self.model.index(row_updated, 0)
+            bottom_right = self.model.index(
+                row_updated, self.model.columnCount(None) - 1
+            )
+
+            # Emitir dataChanged para toda la fila
+            self.model.dataChanged.emit(top_left, bottom_right)
+
+            # Forzar actualización específica de la columna de status (columna 4)
+            status_index = self.model.index(row_updated, 4)
+            self.model.dataChanged.emit(
+                status_index, status_index, [Qt.DisplayRole, Qt.ForegroundRole]
+            )
+
+            log.debug(f"UI updated for row {row_updated}, status column refreshed")
+        else:
+            log.warning(
+                f"Could not find render {original_render.name()} in model to update"
+            )
 
     def _add_menu_action(self, icon: str, text: str):
         """creates menu action and adds to menu"""
