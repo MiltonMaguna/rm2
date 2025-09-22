@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "sequence": "UAS",
+    "shot": "1410",
+    "plugin": "MayaBatch",
+    "collection_timestamp": "2025-08-01 18:51:59",
+    "total_jobs": 26
+  },
+  "jobs_by_status": {
+    "Completed": [
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_TECH\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_CRYPTO\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_MG_MAIN_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_MG_MAIN_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_MG_MAIN_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_MG_MAIN_TECH",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_MG_MAIN_TECH",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_MG_MAIN_TECH\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_MG_MAIN_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_MG_MAIN_CRYPTO",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_MG_MAIN_CRYPTO\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_ALL_MAIN_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_ALL_MAIN_CRYPTO",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_ALL_MAIN_CRYPTO\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_ALL_MAIN_TECH",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_ALL_MAIN_TECH",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_ALL_MAIN_TECH\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_ALL_VOL_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_ALL_VOL_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_ALL_VOL_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_SHADOW_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_SHADOW_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_SHADOW_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_CONTACT_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_CONTACT_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CONTACT_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_FAR_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_FAR_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_FAR_TECH",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_FAR_TECH",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_TECH\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_FAR_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_FAR_CRYPTO",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_CRYPTO\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_CROWD_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_CROWD_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_BTY\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_CROWD_TECH",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_CROWD_TECH",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_TECH\\LGT_UAS_1410_v0004"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_CROWD_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_CROWD_CRYPTO",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_CRYPTO\\LGT_UAS_1410_v0004"
+      }
+    ],
+    "Queued": [
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_BTY\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_TECH\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_CRYPTO\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_FAR_BTY",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_FAR_BTY",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_BTY\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_FAR_TECH",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_FAR_TECH",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_TECH\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_FAR_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_FAR_CRYPTO",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_FAR_CRYPTO\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_CROWD_BTY",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_CROWD_BTY",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_BTY\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_CROWD_TECH",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_CROWD_TECH",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_TECH\\LGT_UAS_1410_v0005"
+      },
+      {
+        "job_name": "LGT_UAS_1410_v0005_RND_BG_CROWD_CRYPTO",
+        "batch_name": "LGT_UAS_1410_v0005",
+        "render_layer": "RND_BG_CROWD_CRYPTO",
+        "version": "0005",
+        "user": "denisemoor",
+        "frames": "1001-1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_CROWD_CRYPTO\\LGT_UAS_1410_v0005"
+      }
+    ],
+    "Rendering": [
+      {
+        "job_name": "LGT_UAS_1410_v0004_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_UAS_1410_v0004",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0004",
+        "user": "denisemoor",
+        "frames": "1001,1135",
+        "output_directories": "I:\\TOPG\\FRAMES\\UAS\\1410\\CG\\RND_BG_MAIN_BTY\\LGT_UAS_1410_v0004",
+        "progress": "50 %   (1/2)"
+      }
+    ]
+  }
+}

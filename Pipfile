@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pytest = "*"
+pytest-mock = "*"
+coverage = "*"
+qt-log = "*"
+python-backpack = "*"
+requests = "*"
+
+[dev-packages]
+coverage = "*"
+pytest = "*"
+pytest-mock = "*"
+
+[requires]
+python_version = "3.11"

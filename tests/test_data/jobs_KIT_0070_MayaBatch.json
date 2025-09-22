@@ -1,0 +1,481 @@
+{
+  "metadata": {
+    "sequence": "KIT",
+    "shot": "0070",
+    "plugin": "MayaBatch",
+    "collection_timestamp": "2025-08-01 20:38:52",
+    "total_jobs": 52
+  },
+  "jobs_by_status": {
+    "Completed": [
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_BTY\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_TECH\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_CRYPTO\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_MG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_MG_MAIN_BTY",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_BTY\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_MG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_MG_MAIN_TECH",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_TECH\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_MG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_MG_MAIN_CRYPTO",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_CRYPTO\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_ALL_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_ALL_MAIN_CRYPTO",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_CRYPTO\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_ALL_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_ALL_MAIN_TECH",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_TECH\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0010_RND_ALL_VOL_BTY",
+        "batch_name": "LGT_KIT_0070_v0010",
+        "render_layer": "RND_ALL_VOL_BTY",
+        "version": "0010",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_VOL_BTY\\LGT_KIT_0070_v0010"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0012_RND_VFX_FIRE_BTY",
+        "batch_name": "LGT_KIT_0070_v0012",
+        "render_layer": "RND_VFX_FIRE_BTY",
+        "version": "0012",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FIRE_BTY\\LGT_KIT_0070_v0012"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0012_RND_VFX_EMBERS_BTY",
+        "batch_name": "LGT_KIT_0070_v0012",
+        "render_layer": "RND_VFX_EMBERS_BTY",
+        "version": "0012",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_EMBERS_BTY\\LGT_KIT_0070_v0012"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0012_RND_VFX_EXPLODEEMBERS_BTY",
+        "batch_name": "LGT_KIT_0070_v0012",
+        "render_layer": "RND_VFX_EXPLODEEMBERS_BTY",
+        "version": "0012",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_EXPLODEEMBERS_BTY\\LGT_KIT_0070_v0012"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0012_RND_VFX_FIREEXPLODE_BTY",
+        "batch_name": "LGT_KIT_0070_v0012",
+        "render_layer": "RND_VFX_FIREEXPLODE_BTY",
+        "version": "0012",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FIREEXPLODE_BTY\\LGT_KIT_0070_v0012"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_TECH\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_CRYPTO\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_MAIN_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_MAIN_TECH",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_TECH\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_MAIN_CRYPTO",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_CRYPTO\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_ALL_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_ALL_MAIN_CRYPTO",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_CRYPTO\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_ALL_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_ALL_MAIN_TECH",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_TECH\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_ALL_VOL_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_ALL_VOL_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_VOL_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_FIRE_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_FIRE_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_FIRE_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_EMBERS_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_EMBERS_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_EMBERS_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_EXPLODEEMBERS_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_EXPLODEEMBERS_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_EXPLODEEMBERS_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0013_RND_MG_FIREEXPLODE_BTY",
+        "batch_name": "LGT_KIT_0070_v0013",
+        "render_layer": "RND_MG_FIREEXPLODE_BTY",
+        "version": "0013",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_FIREEXPLODE_BTY\\LGT_KIT_0070_v0013"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_BTY\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_TECH\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_CRYPTO\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_MG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_MG_MAIN_BTY",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_BTY\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_MG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_MG_MAIN_TECH",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_TECH\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_MG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_MG_MAIN_CRYPTO",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_MG_MAIN_CRYPTO\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_ALL_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_ALL_MAIN_CRYPTO",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_CRYPTO\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_ALL_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_ALL_MAIN_TECH",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_MAIN_TECH\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0015_RND_ALL_VOL_BTY",
+        "batch_name": "LGT_KIT_0070_v0015",
+        "render_layer": "RND_ALL_VOL_BTY",
+        "version": "0015",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_ALL_VOL_BTY\\LGT_KIT_0070_v0015"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0018_RND_VFX_FIRE_BTY",
+        "batch_name": "LGT_KIT_0070_v0018",
+        "render_layer": "RND_VFX_FIRE_BTY",
+        "version": "0018",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FIRE_BTY\\LGT_KIT_0070_v0018"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0018_RND_VFX_SPARKS_BTY",
+        "batch_name": "LGT_KIT_0070_v0018",
+        "render_layer": "RND_VFX_SPARKS_BTY",
+        "version": "0018",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_SPARKS_BTY\\LGT_KIT_0070_v0018"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0018_RND_VFX_EXPLODEFIRE_BTY",
+        "batch_name": "LGT_KIT_0070_v0018",
+        "render_layer": "RND_VFX_EXPLODEFIRE_BTY",
+        "version": "0018",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_EXPLODEFIRE_BTY\\LGT_KIT_0070_v0018"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0018_RND_VFX_EXPLODESPARKS_BTY",
+        "batch_name": "LGT_KIT_0070_v0018",
+        "render_layer": "RND_VFX_EXPLODESPARKS_BTY",
+        "version": "0018",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_EXPLODESPARKS_BTY\\LGT_KIT_0070_v0018"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0018_RND_VFX_FURNACEFLAME_BTY",
+        "batch_name": "LGT_KIT_0070_v0018",
+        "render_layer": "RND_VFX_FURNACEFLAME_BTY",
+        "version": "0018",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FURNACEFLAME_BTY\\LGT_KIT_0070_v0018"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0019_RND_VFX_FIRE_BTY",
+        "batch_name": "LGT_KIT_0070_v0019",
+        "render_layer": "RND_VFX_FIRE_BTY",
+        "version": "0019",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FIRE_BTY\\LGT_KIT_0070_v0019"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0019_RND_VFX_SPARKS_BTY",
+        "batch_name": "LGT_KIT_0070_v0019",
+        "render_layer": "RND_VFX_SPARKS_BTY",
+        "version": "0019",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_SPARKS_BTY\\LGT_KIT_0070_v0019"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0019_RND_VFX_FIREALPHA_BTY",
+        "batch_name": "LGT_KIT_0070_v0019",
+        "render_layer": "RND_VFX_FIREALPHA_BTY",
+        "version": "0019",
+        "user": "facundolavenia",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_VFX_FIREALPHA_BTY\\LGT_KIT_0070_v0019"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0020_RND_BG_MAIN_BTY",
+        "batch_name": "LGT_KIT_0070_v0020",
+        "render_layer": "RND_BG_MAIN_BTY",
+        "version": "0020",
+        "user": "facundolavenia",
+        "frames": "1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_BTY\\LGT_KIT_0070_v0020"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0020_RND_BG_MAIN_TECH",
+        "batch_name": "LGT_KIT_0070_v0020",
+        "render_layer": "RND_BG_MAIN_TECH",
+        "version": "0020",
+        "user": "facundolavenia",
+        "frames": "1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_TECH\\LGT_KIT_0070_v0020"
+      },
+      {
+        "job_name": "LGT_KIT_0070_v0020_RND_BG_MAIN_CRYPTO",
+        "batch_name": "LGT_KIT_0070_v0020",
+        "render_layer": "RND_BG_MAIN_CRYPTO",
+        "version": "0020",
+        "user": "facundolavenia",
+        "frames": "1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_MAIN_CRYPTO\\LGT_KIT_0070_v0020"
+      },
+      {
+        "job_name": "SBX_KIT_0070_v0005_RND_FG_EXPLODE_BTY",
+        "batch_name": "SBX_KIT_0070_v0005",
+        "render_layer": "RND_FG_EXPLODE_BTY",
+        "version": "0005",
+        "user": "guillermomarquez",
+        "frames": "1077-1124",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_FG_EXPLODE_BTY\\SBX_KIT_0070_v0005"
+      },
+      {
+        "job_name": "SBX_KIT_0070_v0007_RND_FG_EXPLODE_BTY",
+        "batch_name": "SBX_KIT_0070_v0007",
+        "render_layer": "RND_FG_EXPLODE_BTY",
+        "version": "0007",
+        "user": "guillermomarquez",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_FG_EXPLODE_BTY\\SBX_KIT_0070_v0007"
+      },
+      {
+        "job_name": "SBX_KIT_0070_v0007_RND_FG_EXPLODE_TECH",
+        "batch_name": "SBX_KIT_0070_v0007",
+        "render_layer": "RND_FG_EXPLODE_TECH",
+        "version": "0007",
+        "user": "guillermomarquez",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_FG_EXPLODE_TECH\\SBX_KIT_0070_v0007"
+      },
+      {
+        "job_name": "SBX_KIT_0070_v0008_RND_FG_EXPLODE_BTY",
+        "batch_name": "SBX_KIT_0070_v0008",
+        "render_layer": "RND_FG_EXPLODE_BTY",
+        "version": "0008",
+        "user": "guillermomarquez",
+        "frames": "1077-1124",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_FG_EXPLODE_BTY\\SBX_KIT_0070_v0008"
+      },
+      {
+        "job_name": "SBX_KIT_0070_v0008_RND_FG_EXPLODE_TECH",
+        "batch_name": "SBX_KIT_0070_v0008",
+        "render_layer": "RND_FG_EXPLODE_TECH",
+        "version": "0008",
+        "user": "guillermomarquez",
+        "frames": "1077-1124",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_FG_EXPLODE_TECH\\SBX_KIT_0070_v0008"
+      },
+      {
+        "job_name": "VFX_KIT_0070_v0014_RND_BG_FOOTPRINT_BTY",
+        "batch_name": "VFX_KIT_0070_v0014",
+        "render_layer": "RND_BG_FOOTPRINT_BTY",
+        "version": "0014",
+        "user": "guillermomarquez",
+        "frames": "1001-1088",
+        "output_directories": "I:\\FURNACE\\FRAMES\\KIT\\0070\\CG\\RND_BG_FOOTPRINT_BTY\\VFX_KIT_0070_v0014"
+      }
+    ]
+  }
+}
