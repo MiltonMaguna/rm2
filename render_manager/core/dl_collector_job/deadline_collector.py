@@ -2,10 +2,10 @@ from collections import defaultdict
 from typing import List, Dict
 
 from qt_log.stream_log import get_stream_logger
-from Test_RenderManager.render_manager.core.dl_collector_job.libs.render.render_layer import (
+from rm2.render_manager.core.dl_collector_job.libs.render.render_layer import (
     Render,
 )
-from Test_RenderManager.render_manager.render.tokens import (
+from rm2.render_manager.render.tokens import (
     RENDER_PREFIX,
     RENDER_PREFIX_VERSION,
     RENDER_ROLE,

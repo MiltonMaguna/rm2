@@ -8,9 +8,9 @@ from PySide2.QtGui import QIcon, QCursor
 from qt_log.stream_log import get_stream_logger
 from backpack.folder_utils import browse_folder
 
-from Test_RenderManager.render_manager.mvc.config import MODEL_DATA
-from Test_RenderManager.render_manager.mvc.model import RenderTableModel
-from Test_RenderManager.render_manager.mvc.libs.edit_render_dialog import (
+from rm2.render_manager.mvc.config import MODEL_DATA
+from rm2.render_manager.mvc.model import RenderTableModel
+from rm2.render_manager.mvc.libs.edit_render_dialog import (
     EditRenderDialog,
 )
 from CG_Template.cg_template.main import run
@@ -94,19 +94,25 @@ class RendersView:
         dialog = EditRenderDialog(render, self.parent.renders(), None)
         if dialog.exec_() == QDialog.Accepted:
             # Aplicar cambios de forma segura DESPUÉS de cerrar el diálogo
-            changes_applied = dialog.apply_changes_safely()
+            changes_applied, selected_render = dialog.apply_changes_safely()
 
-            if changes_applied:
-                log.debug(f"Nueva versión: {render.int_version()}")
-                log.debug(f"Nuevo usuario: {render.user()}")
-                log.debug(f"Nuevo progreso: {render.progress_bar()}")
-                log.debug(f"Nuevos frames: {render.frame_range()}")
-                log.debug(f"Nueva ruta: {render.path()}")
+            if changes_applied and selected_render:
+                log.debug(f"Nueva versión: {selected_render.int_version()}")
+                log.debug(f"Nuevo usuario: {selected_render.user()}")
+                log.debug(f"Nuevo progreso: {selected_render.progress_bar()}")
+                log.debug(f"Nuevos frames: {selected_render.frame_range()}")
+                log.debug(f"Nueva ruta: {selected_render.path()}")
 
                 # Actualizar la vista después del cambio
                 self.update_view(self.parent.renders())
 
-        log.info(f"Updated {render.name()} to version {render.int_version()}")
+                log.info(
+                    f"Updated {render.name()} to version {selected_render.int_version()}"
+                )
+            else:
+                log.warning("No se pudieron aplicar los cambios")
+        else:
+            log.debug("Diálogo cancelado por el usuario")
 
     def _add_menu_action(self, icon: str, text: str):
         """creates menu action and adds to menu"""

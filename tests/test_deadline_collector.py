@@ -3,10 +3,8 @@ from render_manager.core.dl_collector_job.deadline_collector import (
 )
 import json
 
-# json_file_path = r'D:\repo\Test_RenderManager\tests\test_data\jobs_UAS_1410_MayaBatch.json'
-json_file_path = (
-    r"D:\repo\Test_RenderManager\tests\test_data\jobs_KIT_0070_MayaBatch.json"
-)
+# json_file_path = r'D:\repo\rm2\tests\test_data\jobs_UAS_1410_MayaBatch.json'
+json_file_path = r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
 
 
 def test_render_collector_manually():

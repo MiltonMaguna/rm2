@@ -8,18 +8,18 @@ from qt_log.stream_log import get_stream_logger
 from backpack.test_utils import time_function_decorator
 from backpack.cache import timed_lru_cache
 
-from Test_RenderManager.render_manager.mvc.view import RendersView
+from rm2.render_manager.mvc.view import RendersView
 
-# from Test_RenderManager.render_manager.core.disk_collector import collect_render_layers_from
-from Test_RenderManager.render_manager.core.dl_collector_job.deadline_collector import (
+# from rm2.render_manager.core.disk_collector import collect_render_layers_from
+from rm2.render_manager.core.dl_collector_job.deadline_collector import (
     collect_render_layers_from_deadline,
 )
-from Test_RenderManager.render_manager.render.render_states import SYNC
+from rm2.render_manager.render.render_states import SYNC
 
 log = get_stream_logger("RenderManager")
 
 # json_file_path = (
-# r"D:\repo\Test_RenderManager\tests\test_data\jobs_KIT_0070_MayaBatch.json"
+# r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
 # )
 
 

@@ -10,7 +10,7 @@ from PySide2.QtWidgets import (
 )
 from PySide2.QtCore import QAbstractTableModel, Qt, QModelIndex
 from PySide2.QtGui import QFont
-from Test_RenderManager.render_manager.core.dl_collector_job.libs.render.render_layer import (
+from rm2.render_manager.core.dl_collector_job.libs.render.render_layer import (
     Render,
 )
 from qt_log.stream_log import get_stream_logger
@@ -182,3 +182,47 @@ class EditRenderDialog(QDialog):
                 f"Selected version: {self.render.name()} v{self.render.int_version()}"
             )
             self.accept()
+
+    def apply_changes_safely(self):
+        """Aplica los cambios de forma segura después de cerrar el diálogo.
+
+                Esta función retorna el render seleccionado para que la vista padre
+                pueda actualizar correctamente su estructura de datos.
+
+        from rm2.render_manager.main import run_test
+        run_test()
+                Returns:
+                    tuple: (bool, Render|None) - (success, selected_render)
+        """
+        if not hasattr(self, "selected_version") or self.selected_version is None:
+            log.debug("No hay versión seleccionada para aplicar cambios")
+            return False, None
+
+        try:
+            log.debug(
+                f"Aplicando cambios desde versión {self.selected_version.int_version()}"
+            )
+            log.debug(
+                f"Render seleccionado: {self.selected_version.name()} v{self.selected_version.int_version()}"
+            )
+            log.debug(f"Usuario: {self.selected_version.user()}")
+            log.debug(f"Progreso: {self.selected_version.progress_bar()}")
+            log.debug(f"Frames: {self.selected_version.frame_range()}")
+            log.debug(f"Path: {self.selected_version.path()}")
+
+            log.info(
+                f"Cambios aplicados exitosamente a {self.selected_version.name()} v{self.selected_version.int_version()}"
+            )
+            return True, self.selected_version
+
+        except Exception as e:
+            log.error(f"Error al aplicar cambios: {e}")
+            return False, None
+
+    def get_selected_render(self):
+        """Retorna el render seleccionado.
+
+        Returns:
+            Render|None: El render seleccionado o None si no hay selección
+        """
+        return getattr(self, "selected_version", None)
