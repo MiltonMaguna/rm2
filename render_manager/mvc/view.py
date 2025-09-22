@@ -84,6 +84,8 @@ class RendersView:
         self.menu.popup(QCursor.pos())
         edit = self._add_menu_action(":/edit", "edit Render")
         edit.triggered.connect(self.edit_callback)
+        select_version = self._add_menu_action(":/version", "Select Version")
+        select_version.triggered.connect(self.version_selector_callback)
         # select version
 
     def edit_callback(self):
@@ -100,6 +102,28 @@ class RendersView:
         render = selection[0]
         log.debug(f"Edit callback: {render}")
         self.open_edit_dialog(render)
+
+    def version_selector_callback(self):
+        """Seleccionar versión del render sin modificar el original"""
+        selection = self.get_view_selection()
+        if not selection:
+            log.warning("Nothing Selected!")
+            return
+
+        if len(selection) > 1:
+            log.warning("Select only one render to change version!")
+            return
+
+        render = selection[0]
+        log.debug(f"Version selector callback: {render}")
+        selected_render = self.open_version_selector_dialog(render)
+
+        if selected_render:
+            log.info(
+                f"Successfully changed version for {render.name()} to v{selected_render.int_version()}"
+            )
+        else:
+            log.info("Version selection cancelled")
 
     def open_edit_dialog(self, render):
         """Abrir diálogo para seleccionar versión"""
@@ -122,6 +146,51 @@ class RendersView:
                 self.update_view(self.parent.renders())
 
         log.info(f"Updated {render.name()} to version {render.int_version()}")
+
+    def open_version_selector_dialog(self, render):
+        """Abrir diálogo para seleccionar versión sin modificar el render original"""
+        log.debug(f"Selecting version for render: {render.name()}")
+        log.debug(f"Available renders: {self.parent.renders()}")
+
+        dialog = EditRenderDialog(render, self.parent.renders(), None)
+        if dialog.exec_() == QDialog.Accepted:
+            # Obtener la nueva versión seleccionada sin modificar el render original
+            selected_render = dialog.render
+
+            if selected_render:
+                log.debug(f"Versión seleccionada: {selected_render.int_version()}")
+                log.debug(f"Frames: {selected_render.frame_range()}")
+                log.debug(f"Ruta: {selected_render.path()}")
+
+                # Actualizar la vista con la nueva versión seleccionada
+                # Actualizar solo el render específico en el modelo local
+                self._update_render_in_view(render, selected_render)
+
+                log.info(
+                    f"Selected new version for {render.name()}: v{selected_render.int_version()}"
+                )
+                return selected_render
+
+        return None
+
+    def _update_render_in_view(self, original_render, new_render):
+        """Actualizar el render en la vista con la nueva versión seleccionada"""
+        # Encontrar y reemplazar el render en el modelo actual
+        for i, current_render in enumerate(self.model.renders):
+            if current_render.name() == original_render.name():
+                self.model.renders[i] = new_render
+                log.debug(
+                    f"Updated render at index {i}: {new_render.name()} v{new_render.int_version()}"
+                )
+                break
+
+        # Emitir señal de cambio de datos para refrescar la vista
+        self.model.dataChanged.emit(
+            self.model.index(0, 0),
+            self.model.index(
+                self.model.rowCount(None) - 1, self.model.columnCount(None) - 1
+            ),
+        )
 
     def _add_menu_action(self, icon: str, text: str):
         """creates menu action and adds to menu"""
