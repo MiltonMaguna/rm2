@@ -11,8 +11,8 @@ with contextlib.suppress(ImportError):
 
 from pyside_ui_backpack import wait_cursor
 from qt_log.stream_log import get_stream_logger
-from render_manager.render.render_layer_types import Render
-# from render_manager.core.deadline.python_deadline import PythonDeadline
+from rm2.render_manager.render.render_layer_types import Render
+# from rm2.render_manager.core.deadline.python_deadline import PythonDeadline
 
 log = get_stream_logger("RenderManager")
 

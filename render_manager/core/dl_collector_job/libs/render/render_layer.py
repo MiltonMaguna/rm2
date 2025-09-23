@@ -10,10 +10,10 @@ try:
 except ImportError:
     import render_manager.mocks.nuke as nuke
 
-from render_manager.core.libs.reformat import ReformatRenderLayer
-from render_manager.render.libs.create import Create
-from render_manager.render.libs.remove import RemoveRenderLayer
-from render_manager.render.render_states import OUTDATED, SYNC, UNLOADED
+from rm2.render_manager.core.libs.reformat import ReformatRenderLayer
+from rm2.render_manager.render.libs.create import Create
+from rm2.render_manager.render.libs.remove import RemoveRenderLayer
+from rm2.render_manager.render.render_states import OUTDATED, SYNC, UNLOADED
 
 
 class Render:
