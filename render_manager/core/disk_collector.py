@@ -5,8 +5,8 @@
 import os
 from typing import List
 from qt_log.stream_log import get_stream_logger
-from render_manager.render.render_layer import Render
-from render_manager.render.tokens import (
+from rm2.render_manager.render.render_layer import Render
+from rm2.render_manager.render.tokens import (
     RENDER_PREFIX,
     RENDER_PREFIX_VERSION,
     RENDER_ROLE,
@@ -236,3 +236,60 @@ def check_for_empty_subfolders(folder_path: str) -> bool:  # sourcery skip: use-
                 return True
 
         return False
+
+
+def get_user_and_reference(data: dict) -> str:
+    """
+    Extract user and reference information from Maya scene data.
+    
+    Args:
+        data (dict): Dictionary containing scene information with 'system' and 'arcane' keys
+        
+    Returns:
+        str: Formatted string with user and reference node information
+    """
+    result = []
+    
+    # Extract user from system section
+    user = data.get("system", {}).get("User", "Unknown")
+    result.append(f"User: {user}")
+    
+    # Extract references from arcane section
+    arcane_data = data.get("arcane", [])
+    references_line = None
+    
+    # Find the references string in arcane data
+    for item in arcane_data:
+        if "STRING references" in item:
+            references_line = item
+            break
+    
+    if references_line:
+        # Extract the references list from the string
+        # The format is: "STRING references [...]"
+        start_bracket = references_line.find('[')
+        end_bracket = references_line.rfind(']')
+        
+        if start_bracket != -1 and end_bracket != -1:
+            references_str = references_line[start_bracket+1:end_bracket]
+            
+            # Split by quotes and filter out empty strings
+            references = [ref.strip().strip("'").strip('"') for ref in references_str.split("',") if ref.strip()]
+            
+            # Process each reference
+            for ref in references:
+                if "Reference Node:" in ref and "FilePath:" in ref:
+                    # Extract node name
+                    node_start = ref.find("Reference Node:") + len("Reference Node:")
+                    node_end = ref.find(" - FilePath:")
+                    node_name = ref[node_start:node_end].strip()
+                    
+                    # Extract file path and get filename
+                    filepath_start = ref.find("FilePath:") + len("FilePath:")
+                    filepath = ref[filepath_start:].strip()
+                    filename = os.path.basename(filepath)
+                    
+                    result.append(f"Node: {node_name}, version: {filename}")
+    
+    return "\n".join(result)
+    
