@@ -17,7 +17,7 @@ from rm2.render_manager.mvc.libs.edit_render_dialog import (
 from CG_Template.cg_template.main import run
 from CG_Template.cg_template.libs.create_init_constant import create_init_constant
 
-log = get_stream_logger("RenderManager")
+log = get_stream_logger("RenderManager - View")
 
 
 class RendersView:
@@ -111,8 +111,8 @@ class RendersView:
 
     def open_version_selector_dialog(self, render):
         """Abrir diálogo para seleccionar versión sin modificar el render original"""
-        log.debug(f"Selecting version for render: {render.name()}")
-        log.debug(f"Available renders: {self.parent.renders()}")
+        # log.debug(f"Selecting version for render: {render.name()}")
+        # log.debug(f"Available renders: {self.parent.renders()}")
 
         dialog = EditRenderDialog(render, self.parent.renders(), None)
         if dialog.exec_() == QDialog.Accepted:
