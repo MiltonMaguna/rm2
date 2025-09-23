@@ -16,10 +16,10 @@ from arcane import get_session
 from arcane.core.setenv.decorators import project_setter
 from .mvc.controller import Controller
 
-from .core.dl_collector_job.collect_from_deadline import collect_by_shot_with_json
+# from .core.dl_collector_job.collect_from_deadline import collect_by_shot_with_json
 from .version import __qt__, version, app_name, ui_file
 
-log = get_stream_logger("RenderManager - TEST")
+log = get_stream_logger("RenderManager - main")
 PLUGIN = "MayaBatch"
 OUTPUT_DIR = r"C:\temp\deadline_jobs"
 
