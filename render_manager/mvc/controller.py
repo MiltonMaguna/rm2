@@ -17,9 +17,9 @@ from rm2.render_manager.core.disk_collector import (
 # from rm2.render_manager.core.dl_collector_job.deadline_collector import (
 # collect_render_layers_from_deadline,
 # )
-from rm2.render_manager.render.render_states import SYNC
+# from rm2.render_manager.render.render_states import SYNC
 
-log = get_stream_logger("RenderManager")
+log = get_stream_logger("RenderManager - Controller")
 
 # json_file_path = (
 # r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
@@ -71,16 +71,20 @@ class Controller:
     def load_callback(self):
         """load selected render_layers"""
         selection = self.get_view_selection()
+        log.debug(f"Selection: {selection}")
+
         if not selection:
             log.warning("Nothing Selected!")
             return
 
         counter, count_max = 1, len(selection)
         for render in selection:
-            log.process(f"Loading: {render.name()} ({counter} of {count_max})")
+            log.process(
+                f"Loading: {render.name()}_{render.version()} ({counter} of {count_max})"
+            )
 
-            if render.status() != SYNC.value:
-                render.load()
+            # if render.status() != SYNC.value:
+            render.load()
 
             counter += 1
 
