@@ -15,7 +15,7 @@ from rm2.render_manager.core.dl_collector_job.libs.render.render_layer import (
 )
 from qt_log.stream_log import get_stream_logger
 
-log = get_stream_logger("RenderManager - TEST - EditRenderDialog")
+log = get_stream_logger("RenderManager - EditRenderDialog")
 
 
 class VersionTableModel(QAbstractTableModel):
@@ -88,8 +88,6 @@ class EditRenderDialog(QDialog):
         self.render = render
         self.all_renders = all_renders
         self.selected_version = None
-
-        log.debug(f"Editing render: {self.render.name()} v{self.render.int_version()}")
 
         self.setWindowTitle(f"Select Version for: {render.name()}")
         self.setModal(True)
@@ -174,7 +172,7 @@ class EditRenderDialog(QDialog):
         if self.selected_version:
             # En lugar de modificar self.render, simplemente asignamos la versión seleccionada
             self.render = self.selected_version
-            log.debug(
+            log.info(
                 f"Selected version: {self.render.name()} v{self.render.int_version()}"
             )
             self.accept()
