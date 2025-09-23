@@ -111,8 +111,6 @@ class RendersView:
 
     def open_version_selector_dialog(self, render):
         """Abrir diálogo para seleccionar versión sin modificar el render original"""
-        # log.debug(f"Selecting version for render: {render.name()}")
-        # log.debug(f"Available renders: {self.parent.renders()}")
 
         dialog = EditRenderDialog(render, self.parent.renders(), None)
         if dialog.exec_() == QDialog.Accepted:
@@ -124,8 +122,6 @@ class RendersView:
                 log.debug(f"Frames: {selected_render.frame_range()}")
                 log.debug(f"Ruta: {selected_render.path()}")
 
-                # Actualizar la vista con la nueva versión seleccionada
-                # Actualizar solo el render específico en el modelo local
                 self._update_render_in_view(render, selected_render)
 
                 log.info(

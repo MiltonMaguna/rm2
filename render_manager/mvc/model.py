@@ -42,7 +42,7 @@ class RenderTableModel(QAbstractTableModel):
 
         # ColorRole for Sync Status
         if role == Qt.ForegroundRole and index.column():
-            if index.column() == 5:
+            if index.column() == 6:
                 return self.STATUS_COLOR[render.status()]
 
             return QColor(230, 230, 230)
@@ -55,11 +55,14 @@ class RenderTableModel(QAbstractTableModel):
         column_data = dict(MODEL_DISPLAYROLE)
         column_data[0] = render.name()
         column_data[1] = render.version_from_read()
+        column_data[2] = (
+            render.int_version()
+        )  # Mostrar la versión actual del render, no la cargada en Nuke
         nrange, nframes = render.ranges_from_read()
-        column_data[2] = nrange
-        column_data[3] = nframes
-        column_data[4] = len(render.aovs())
-        column_data[5] = render.status_text()
+        column_data[3] = nrange
+        column_data[4] = nframes
+        column_data[5] = len(render.aovs())
+        column_data[6] = render.status_text()
 
         return column_data[index.column()]
 
