@@ -42,10 +42,23 @@ class RenderTableModel(QAbstractTableModel):
 
         # ColorRole for Sync Status
         if role == Qt.ForegroundRole and index.column():
-            if index.column() == 6:
+            if index.column() == 4:
                 return self.STATUS_COLOR[render.status()]
 
             return QColor(230, 230, 230)
+
+        # ToolTip role for ABC versions column
+        if role == Qt.ToolTipRole:
+            if index.column() == 6:  # ABC versions column
+                abc_versions = render.abc_versions()
+                if abc_versions:
+                    tooltip_text = "ABC Versions:\n" + "\n".join(
+                        [f"• {version}" for version in abc_versions]
+                    )
+                    return tooltip_text
+                else:
+                    return "No ABC versions found"
+            return None
 
         # display role filter
         if role != Qt.DisplayRole:
@@ -58,11 +71,11 @@ class RenderTableModel(QAbstractTableModel):
         column_data[2] = (
             render.int_version()
         )  # Mostrar la versión actual del render, no la cargada en Nuke
-        nrange, nframes = render.ranges_from_read()
+        nrange, _ = render.ranges_from_read()
         column_data[3] = nrange
-        column_data[4] = nframes
-        column_data[5] = len(render.aovs())
-        column_data[6] = render.status_text()
+        column_data[4] = render.status_text()
+        column_data[5] = render.user()
+        column_data[6] = ", ".join(render.abc_versions())
 
         return column_data[index.column()]
 
