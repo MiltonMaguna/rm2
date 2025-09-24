@@ -8,9 +8,9 @@ MODEL_DATA = [
     (1, "In Scripts", 80),  # scene layer version
     (2, "On disk", 80),  # on disk version
     (3, "Range", 80),  # current nuke read range
-    (4, "Frames", 80),  # frames count
-    (5, "Aovs", 60),  # aovs count
-    (6, "Status", 105),  # icon/scene status
+    (4, "Status", 105),  # icon/scene status
+    (5, "User", 120),  # user who created the layer
+    (6, "Abc Versions", 200),  # alembic versions used in this layer
 ]
 
 # empty dict with text blocks for displayRole in modelview
