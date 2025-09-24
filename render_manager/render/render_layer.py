@@ -17,7 +17,7 @@ from rm2.render_manager.render.render_states import OUTDATED, SYNC, UNLOADED
 
 
 class Render:
-    def __init__(self, path: str, name: str, aovs: list) -> None:
+    def __init__(self, path: str, name: str, aovs: list, info_json: dict) -> None:
         """Render Layer Object
         Args:
             path (str): disk path to this render layer
@@ -27,6 +27,7 @@ class Render:
         self._path = path
         self._name = name
         self._aovs = aovs
+        self._info_json = info_json
 
     def __str__(self) -> str:
         return f"RENDER LAYER {self.name()}, path {self.path()}, aovs {self.aovs()}"
@@ -101,6 +102,14 @@ class Render:
         Eg: ['crypto_asset', 'crypto_material', 'crypto_object']
         """
         return self._aovs
+
+    def user(self) -> str:
+        """returns user who created this render layer"""
+        return self._info_json.get("user", "jdo")
+
+    def abc_versions(self) -> list:
+        """returns list of alembic files used in this render layer"""
+        return self._info_json.get("abc_versions", [])
 
     def get_aov_data(self, aov_name: str) -> dict:
         """get all the data for this aov from disk files"""
