@@ -14,7 +14,9 @@ from rm2.render_manager.render.tokens import (
     TECHS_AOVS_IN_LAYER,
 )
 
-log = get_stream_logger("RenderManager")
+from backpack.json_utils import json_load
+
+log = get_stream_logger("RenderManager - DiskCollector")
 
 
 def collect_render_layers_by_role(path: str) -> dict[str, List[Render]]:
@@ -56,8 +58,11 @@ def collect_render_layers_by_role(path: str) -> dict[str, List[Render]]:
 
             # collect aovs and data for all versions of this render layer
             for version_path in version_paths:
+                info_json = get_user_and_reference(get_json_data(version_path))
                 aovs = _get_aovs(version_path, name)
-                render = Render(path=version_path, name=name, aovs=aovs)
+                render = Render(
+                    path=version_path, name=name, aovs=aovs, info_json=info_json
+                )
                 render_layers_by_role[role].append(render)
 
     return render_layers_by_role
@@ -102,25 +107,34 @@ def _get_valid_render_layers(frame_path: str) -> tuple:
     """
     rnd_layers = []
 
-    for name in list(os.listdir(frame_path)):
+    # Convert to sets for O(1) lookup instead of O(n)
+    render_prefix_set = set(RENDER_PREFIX)
+    render_role_set = set(RENDER_ROLE)
+    render_layer_order_set = set(RENDER_LAYER_ORDER)
+
+    for name in os.listdir(frame_path):
         split_name = name.split("_")
+
+        # Need at least 2 parts for prefix and role
+        if len(split_name) < 2:
+            continue
+
         # filter only valid prefixes folders
-        if split_name[0] not in RENDER_PREFIX:
+        if split_name[0] not in render_prefix_set:
             continue
-        # filter only valid rol folders
-        if split_name[1] not in RENDER_ROLE:
+
+        # filter only valid role folders
+        if split_name[1] not in render_role_set:
             continue
+
         # filter only valid render layer type of folders
-        if split_name[-1] in RENDER_LAYER_ORDER:
+        if split_name[-1] in render_layer_order_set:
             rnd_layers.append(("_").join(split_name[:-1]))
         else:
             log.warning(f"Invalid Render Layers Found: {name}")
 
-    unique_render_layers = list(set(rnd_layers))
-
-    # ! how to sort?
-
-    return sorted(unique_render_layers)
+    # Remove duplicates and sort
+    return sorted(set(rnd_layers))
 
 
 def _get_render_layer_names(path: str, layer: str) -> list:
@@ -153,11 +167,18 @@ def _get_all_version_paths(path_layer: str) -> List[str]:
     Returns:
         List[str]: list of all valid version paths (non-empty)
     """
+    if not os.path.exists(path_layer):
+        return []
+
+    # Get directory contents once instead of multiple times
+    dir_contents = os.listdir(path_layer)
+
     versions = []
-    for suffix in RENDER_PREFIX_VERSION:
-        for _path in os.listdir(path_layer):
+    for _path in dir_contents:
+        for suffix in RENDER_PREFIX_VERSION:
             if _path.startswith(suffix):
                 versions.append(_path)
+                break  # Stop checking other suffixes once we find a match
 
     versions.sort(reverse=True)
 
@@ -200,18 +221,20 @@ def _get_aovs(path: str, name: str) -> list:
 
 
 def check_for_files_exr(folder_path: str) -> bool:
-    # Obtener la lista de archivos en la carpeta
-    files = [file for file in os.listdir(folder_path) if file.endswith(".exr")]
-
-    if len(files) == 0:
+    """Fast check for .exr files - stops at first file found"""
+    try:
+        for file in os.listdir(folder_path):
+            if file.endswith(".exr"):
+                return False  # Found .exr file, not empty
+        return True  # No .exr files found, is empty
+    except (OSError, FileNotFoundError):
         return True
 
-    return False
 
-
-def check_for_empty_subfolders(folder_path: str) -> bool:  # sourcery skip: use-any
+def check_for_empty_subfolders(folder_path: str) -> bool:
     """
-    Check if a folder and all its subfolders are empty.
+    OPTIMIZED: Check if a folder and all its subfolders are empty.
+    Stops at first .exr file found instead of checking everything.
 
     Args:
         folder_path (str): Path to the folder.
@@ -219,77 +242,126 @@ def check_for_empty_subfolders(folder_path: str) -> bool:  # sourcery skip: use-
     Returns:
         bool: True if the folder and all its subfolders are empty, False otherwise.
     """
+    try:
+        contents = os.listdir(folder_path)
 
-    # full empty folder case
-    if len(os.listdir(folder_path)) == 0:
-        return True
-
-    # Recursively check if the folder and all its subfolders are empty
-    for root, dirs, _ in os.walk(folder_path):
-        if not dirs:
+        # full empty folder case
+        if not contents:
             return True
 
-        for folder in dirs:
-            aov_path = os.path.join(root, folder)
+        # Quick check: iterate through contents and stop at first .exr file
+        for item in contents:
+            item_path = os.path.join(folder_path, item)
 
-            if check_for_files_exr(aov_path):
-                return True
+            if os.path.isdir(item_path):
+                # Check if this subfolder has .exr files
+                if not check_for_files_exr(item_path):
+                    return False  # Found .exr files, not empty
 
-        return False
+        return True  # All subfolders are empty
+
+    except (OSError, FileNotFoundError):
+        return True
 
 
-def get_user_and_reference(data: dict) -> str:
+def get_user_and_reference(data: dict) -> dict:
     """
-    Extract user and reference information from Maya scene data.
-    
+    Extract user and ABC version information from Maya scene data.
+
     Args:
         data (dict): Dictionary containing scene information with 'system' and 'arcane' keys
-        
+
     Returns:
-        str: Formatted string with user and reference node information
+        dict: Dictionary with user and ABC version information
     """
-    result = []
-    
+    result = {"user": "Unknown", "abc_versions": []}
+
     # Extract user from system section
     user = data.get("system", {}).get("User", "Unknown")
-    result.append(f"User: {user}")
-    
+    result["user"] = user
+
     # Extract references from arcane section
     arcane_data = data.get("arcane", [])
     references_line = None
-    
+
     # Find the references string in arcane data
     for item in arcane_data:
         if "STRING references" in item:
             references_line = item
             break
-    
+
     if references_line:
         # Extract the references list from the string
         # The format is: "STRING references [...]"
-        start_bracket = references_line.find('[')
-        end_bracket = references_line.rfind(']')
-        
+        start_bracket = references_line.find("[")
+        end_bracket = references_line.rfind("]")
+
         if start_bracket != -1 and end_bracket != -1:
-            references_str = references_line[start_bracket+1:end_bracket]
-            
+            references_str = references_line[start_bracket + 1 : end_bracket]
+
             # Split by quotes and filter out empty strings
-            references = [ref.strip().strip("'").strip('"') for ref in references_str.split("',") if ref.strip()]
-            
-            # Process each reference
+            references = [
+                ref.strip().strip("'").strip('"')
+                for ref in references_str.split("',")
+                if ref.strip()
+            ]
+
+            # Process each reference - only ABC files
             for ref in references:
                 if "Reference Node:" in ref and "FilePath:" in ref:
-                    # Extract node name
-                    node_start = ref.find("Reference Node:") + len("Reference Node:")
-                    node_end = ref.find(" - FilePath:")
-                    node_name = ref[node_start:node_end].strip()
-                    
-                    # Extract file path and get filename
+                    # Extract file path and check if it's ABC
                     filepath_start = ref.find("FilePath:") + len("FilePath:")
                     filepath = ref[filepath_start:].strip()
                     filename = os.path.basename(filepath)
-                    
-                    result.append(f"Node: {node_name}, version: {filename}")
-    
-    return "\n".join(result)
-    
+
+                    # Only process ABC files
+                    if filename.lower().endswith(".abc"):
+                        result["abc_versions"].append(filename)
+
+    return result
+
+
+def get_json_data(path: str) -> dict:
+    """Find and load a JSON file from a directory or load a specific JSON file.
+
+    Args:
+        path (str): Path to a directory containing a JSON file, or path to a specific JSON file
+
+    Returns:
+        dict: The JSON data as a dictionary, or None if no JSON file found or errors occur.
+    """
+    if not os.path.exists(path):
+        log.warning(f"Path does not exist: {path}")
+        return None
+
+    # If it's a directory, search for the JSON file
+    if os.path.isdir(path):
+        json_files = []
+
+        # Search for JSON files in the directory
+        for file in os.listdir(path):
+            if file.lower().endswith(".json"):
+                json_files.append(file)
+
+        if not json_files:
+            log.warning(f"No JSON files found in directory: {path}")
+            return None
+
+        if len(json_files) > 1:
+            log.warning(
+                f"Multiple JSON files found in {path}. Using the first one: {json_files[0]}"
+            )
+
+        # Load the first (or only) JSON file found
+        json_file = json_files[0]
+        file_path = os.path.join(path, json_file)
+
+        try:
+            json_data = json_load(file_path)
+            # log.info(f"Loaded JSON file: {json_file}")
+            return json_data
+        except Exception as e:
+            log.error(f"Error loading JSON from {file_path}: {e}")
+            return None
+
+    return None
