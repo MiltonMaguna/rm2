@@ -103,7 +103,9 @@ def create_backdrop_subcontainer(render: Render, row: int):
 
     for backdrop_type in BACKDROP_SIZE:
         if backdrop_type == render.suffix():
-            node = _create_backdrop(backdrop_type, BACKDROP_SIZE[backdrop_type])
+            node = _create_backdrop(
+                backdrop_type, BACKDROP_SIZE[backdrop_type], subcontainer=True
+            )
             _add_attributes_tab(node, render, row, container=False)
             create_all_aovs(render)
             _move_backdrop(node)
@@ -194,11 +196,17 @@ def _move_backdrop(backdrop_node: str) -> None:
     nukescripts.clear_selection_recursive()
 
 
-def _create_backdrop(backdrop_name: str, backdrop_size: dict):
+def _create_backdrop(
+    backdrop_name: str, backdrop_size: dict, subcontainer: bool = False
+):
     """creates and returns a backdrop node, sets pos/size/label attributes"""
 
+    _label = backdrop_name
+    if subcontainer:
+        _label += " v[value version]"
+
     node = nuke.nodes.BackdropNode(
-        label=backdrop_name,
+        label=_label,
         xpos=backdrop_size["xpos"],
         bdwidth=backdrop_size["bdwidth"],
         ypos=backdrop_size["ypos"],
