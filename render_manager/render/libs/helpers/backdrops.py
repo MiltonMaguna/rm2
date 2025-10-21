@@ -169,6 +169,10 @@ def _add_attributes_tab(
     node.addKnob(path_render)
     path_render.setValue(render.path())
 
+    abc_version_knob = nuke.String_Knob("abc_version", "abc_version")
+    node.addKnob(abc_version_knob)
+    abc_version_knob.setValue(", ".join(render.abc_versions()))
+
     version_knob = nuke.String_Knob("version", "version")
     node.addKnob(version_knob)
     version_knob.setValue(str(render.int_version()))
