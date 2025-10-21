@@ -178,6 +178,22 @@ class Render:
 
         return 0
 
+    def abc_version_from_backdrop(self) -> str:
+        """Returns the abc version string from the backdrop node"""
+        for bdrop in nuke.allNodes("BackdropNode"):
+            with contextlib.suppress(NameError, ValueError):
+                if not int(bdrop["subcontainer"].getValue()):
+                    continue
+
+                if bdrop["name_layer"].getValue() != self.name():
+                    continue
+
+                abc_versions = bdrop["abc_version"].getValue()
+
+                return [item.strip() for item in abc_versions.split(",")]
+
+        return "Not Found"
+
     def ranges_from_read(self) -> tuple:
         """returns range and frame count of this render
         layer READ from current nukescript"""
