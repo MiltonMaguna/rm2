@@ -50,7 +50,7 @@ class RenderTableModel(QAbstractTableModel):
         # ToolTip role for ABC versions column
         if role == Qt.ToolTipRole:
             if index.column() == 6:  # ABC versions column
-                abc_versions = render.abc_versions()
+                abc_versions = render.abc_version_from_backdrop()
                 if abc_versions:
                     tooltip_text = "ABC Versions:\n" + "\n".join(
                         [f"• {version}" for version in abc_versions]
@@ -75,7 +75,7 @@ class RenderTableModel(QAbstractTableModel):
         column_data[3] = nrange
         column_data[4] = render.status_text()
         column_data[5] = render.user()
-        column_data[6] = ", ".join(render.abc_versions())
+        column_data[6] = ", ".join(render.abc_version_from_backdrop())
 
         return column_data[index.column()]
 
