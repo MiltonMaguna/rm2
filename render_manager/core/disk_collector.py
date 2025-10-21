@@ -68,38 +68,6 @@ def collect_render_layers_by_role(path: str) -> dict[str, List[Render]]:
     return render_layers_by_role
 
 
-def collect_render_layers_from(path: str) -> List[Render]:
-    """return a list of Render objects
-    Args:
-        path (str): path to search on shot frames
-    Returns:
-        list: list of Render objects
-    """
-    if not os.path.exists(path):
-        log.warning(f"Path does not exist: {path}")
-        return []
-
-    render_layers = []
-    layers = _get_valid_render_layers(path)
-
-    for layer in layers:
-        for name in _get_render_layer_names(path, layer):
-            base_path = os.path.join(path, name)
-            version_path = _get_last_version_path(base_path)
-
-            # filter out invalid paths or folders
-            if version_path is None:
-                log.warning(f"Discarding invalid path: {version_path}")
-                continue
-
-            # collect aovs and data for this render layer
-            aovs = _get_aovs(version_path, name)
-            render = Render(path=version_path, name=name, aovs=aovs)
-            render_layers.append(render)
-
-    return render_layers
-
-
 def _get_valid_render_layers(frame_path: str) -> tuple:
     """get names of render layers with the correct pipeline naming
     Returns:
@@ -314,8 +282,13 @@ def get_user_and_reference(data: dict) -> dict:
                     filepath = ref[filepath_start:].strip()
                     filename = os.path.basename(filepath)
 
+                    if "shaders" in filename.lower():
+                        continue  # Skip shader references
+
                     # Only process ABC files
-                    if filename.lower().endswith(".abc"):
+                    if filename.lower().endswith(".abc") or filename.lower().endswith(
+                        ".ma"
+                    ):
                         result["abc_versions"].append(filename)
 
     return result
