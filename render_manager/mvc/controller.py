@@ -10,13 +10,16 @@ from backpack.cache import timed_lru_cache
 
 from rm2.render_manager.mvc.view import RendersView
 
-# from rm2.render_manager.core.disk_collector import collect_render_layers_from
-from rm2.render_manager.core.dl_collector_job.deadline_collector import (
-    collect_render_layers_from_deadline,
+from rm2.render_manager.core.disk_collector import (
+    collect_render_layers_by_role,
 )
-from rm2.render_manager.render.render_states import SYNC
 
-log = get_stream_logger("RenderManager")
+# from rm2.render_manager.core.dl_collector_job.deadline_collector import (
+# collect_render_layers_from_deadline,
+# )
+# from rm2.render_manager.render.render_states import SYNC
+
+log = get_stream_logger("RenderManager - Controller")
 
 # json_file_path = (
 # r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
@@ -46,13 +49,13 @@ class Controller:
 
     @time_function_decorator
     @timed_lru_cache(seconds=30)
-    def reset_db(self, json_file_path: str):
+    def reset_db(self, path):
         """clear find cache for shaders"""
         log.process("Reloading Renders....")
-        # self._renders = collect_render_layers_from(path)
-        self._renders = collect_render_layers_from_deadline(
-            self.load_json(json_file_path)
-        )
+        self._renders = collect_render_layers_by_role(path)
+        # self._renders = collect_render_layers_from_deadline(
+        # self.load_json(json_file_path)
+        # )
         # log.info(f"Done. {len(self.renders())} Renders's found")
         self.view.update_view(self.renders())
 
@@ -68,16 +71,20 @@ class Controller:
     def load_callback(self):
         """load selected render_layers"""
         selection = self.get_view_selection()
+        log.debug(f"Selection: {selection}")
+
         if not selection:
             log.warning("Nothing Selected!")
             return
 
         counter, count_max = 1, len(selection)
         for render in selection:
-            log.process(f"Loading: {render.name()} ({counter} of {count_max})")
+            log.process(
+                f"Loading: {render.name()}_{render.version()} ({counter} of {count_max})"
+            )
 
-            if render.status() != SYNC.value:
-                render.load()
+            # if render.status() != SYNC.value:
+            render.load()
 
             counter += 1
 
@@ -102,17 +109,3 @@ class Controller:
         except ImportError:
             print("❌ ImportError: RenderCollector module not found.")
             return {}
-
-    def edit_callback(self):
-        """editar render seleccionado"""
-        selection = self.get_view_selection()
-        if not selection:
-            log.warning("Nothing Selected!")
-            return
-
-        if len(selection) > 1:
-            log.warning("Select only one render to edit!")
-            return
-
-        render = selection[0]
-        self.view.open_edit_dialog(render)

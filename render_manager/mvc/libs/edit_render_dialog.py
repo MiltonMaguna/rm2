@@ -15,14 +15,14 @@ from rm2.render_manager.core.dl_collector_job.libs.render.render_layer import (
 )
 from qt_log.stream_log import get_stream_logger
 
-log = get_stream_logger("RenderManager - TEST - EditRenderDialog")
+log = get_stream_logger("RenderManager - EditRenderDialog")
 
 
 class VersionTableModel(QAbstractTableModel):
     def __init__(self, versions):
         super().__init__()
         self.versions = versions
-        self.headers = ["Version", "User", "Progress", "Frames", "Path"]
+        self.headers = ["Version", "Frames", "Path"]
 
     def rowCount(self, parent=QModelIndex()):
         return len(self.versions)
@@ -40,13 +40,9 @@ class VersionTableModel(QAbstractTableModel):
         if role == Qt.DisplayRole:
             if column == 0:  # Version
                 return str(version.int_version())
-            elif column == 1:  # User
-                return version.user()
-            elif column == 2:  # Progress
-                return version.progress_bar()
-            elif column == 3:  # Frames
+            elif column == 1:  # Frames
                 return version.frame_range()
-            elif column == 4:  # Path
+            elif column == 2:  # Path
                 return version.path()
 
         elif role == Qt.FontRole:
@@ -92,8 +88,6 @@ class EditRenderDialog(QDialog):
         self.render = render
         self.all_renders = all_renders
         self.selected_version = None
-
-        log.debug(f"Editing render: {self.render.name()} v{self.render.int_version()}")
 
         self.setWindowTitle(f"Select Version for: {render.name()}")
         self.setModal(True)
@@ -178,7 +172,7 @@ class EditRenderDialog(QDialog):
         if self.selected_version:
             # En lugar de modificar self.render, simplemente asignamos la versión seleccionada
             self.render = self.selected_version
-            log.debug(
+            log.info(
                 f"Selected version: {self.render.name()} v{self.render.int_version()}"
             )
             self.accept()

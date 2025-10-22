@@ -1,4 +1,4 @@
-from render_manager.core.dl_collector_job.deadline_collector import (
+from rm2.render_manager.core.dl_collector_job.deadline_collector import (
     collect_render_layers_from_deadline,
 )
 import json

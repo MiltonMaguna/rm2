@@ -4,7 +4,7 @@
 # ----------------------------------------------------------------------------------------
 import contextlib
 from qt_log.stream_log import get_stream_logger
-from render_manager.render.render_layer_types import Render
+from rm2.render_manager.render.render_layer_types import Render
 
 try:
     import nuke

@@ -1,4 +1,4 @@
-'''
+"""
 import sys
 for name in list(sys.modules.keys()):
     for pack in ["render_manager."]:
@@ -6,8 +6,8 @@ for name in list(sys.modules.keys()):
             print('removing module', name)
             del sys.modules[name]
 
-from render_manager.mocks.mocked_render_layer import render_layer_bg, render_layer_fg
-from render_manager.render.libs.helpers.backdrops import (get_next_row_container,
+from rm2.render_manager.mocks.mocked_render_layer import render_layer_bg, render_layer_fg
+from rm2.render_manager.render.libs.helpers.backdrops import (get_next_row_container,
                                                         get_next_row_subcontainer,
                                                         create_backdrop_container,
                                                         create_backdrop_subcontainer)
@@ -32,4 +32,4 @@ container = create_backdrop_container(render_layer_fg, row)
 print(container.name())
 print(container.xpos(), container.ypos())
 create_backdrop_subcontainer(render_layer_fg, row)
-'''
+"""

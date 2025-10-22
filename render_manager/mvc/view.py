@@ -5,6 +5,7 @@
 from PySide2 import QtCore
 from PySide2.QtWidgets import QMenu, QAction, QTableView, QMainWindow, QDialog
 from PySide2.QtGui import QIcon, QCursor
+from PySide2.QtCore import Qt
 from qt_log.stream_log import get_stream_logger
 from backpack.folder_utils import browse_folder
 
@@ -16,7 +17,7 @@ from rm2.render_manager.mvc.libs.edit_render_dialog import (
 from CG_Template.cg_template.main import run
 from CG_Template.cg_template.libs.create_init_constant import create_init_constant
 
-log = get_stream_logger("RenderManager")
+log = get_stream_logger("RenderManager - View")
 
 
 class RendersView:
@@ -82,37 +83,51 @@ class RendersView:
         browse = self._add_menu_action(":/browse", "Browse Folder")
         browse.triggered.connect(self.browse_render_layer)
         self.menu.popup(QCursor.pos())
-        edit = self._add_menu_action(":/edit", "edit Render")
-        edit.triggered.connect(self.edit_callback)
+        select_version = self._add_menu_action(":/version", "Select Version")
+        select_version.triggered.connect(self.version_selector_callback)
         # select version
 
-    def open_edit_dialog(self, render):
-        """Abrir diálogo para seleccionar versión"""
-        log.debug(f"Render: {render.name()}")
-        log.debug(f"Parent Render: {self.parent.renders()}")
+    def version_selector_callback(self):
+        """Seleccionar versión del render sin modificar el original"""
+        selection = self.get_view_selection()
+        if not selection:
+            log.warning("Nothing Selected!")
+            return
+
+        if len(selection) > 1:
+            log.warning("Select only one render to change version!")
+            return
+
+        render = selection[0]
+        log.debug(f"Version selector callback: {render}")
+        selected_render = self.open_version_selector_dialog(render)
+
+        if selected_render:
+            log.info(
+                f"Successfully changed version for {render.name()} to v{selected_render.int_version()}"
+            )
+        else:
+            log.info("Version selection cancelled")
+
+    def open_version_selector_dialog(self, render):
+        """Abrir diálogo para seleccionar versión sin modificar el render original"""
 
         dialog = EditRenderDialog(render, self.parent.renders(), None)
         if dialog.exec_() == QDialog.Accepted:
             # Aplicar cambios de forma segura DESPUÉS de cerrar el diálogo
-            changes_applied, selected_render = dialog.apply_changes_safely()
+            changes_applied = dialog.apply_changes_safely()
 
-            if changes_applied and selected_render:
-                log.debug(f"Nueva versión: {selected_render.int_version()}")
-                log.debug(f"Nuevo usuario: {selected_render.user()}")
-                log.debug(f"Nuevo progreso: {selected_render.progress_bar()}")
-                log.debug(f"Nuevos frames: {selected_render.frame_range()}")
-                log.debug(f"Nueva ruta: {selected_render.path()}")
+            if changes_applied:
+                log.debug(f"Nueva versión: {render.int_version()}")
+                log.debug(f"Nuevo usuario: {render.user()}")
+                log.debug(f"Nuevo progreso: {render.progress_bar()}")
+                log.debug(f"Nuevos frames: {render.frame_range()}")
+                log.debug(f"Nueva ruta: {render.path()}")
 
                 # Actualizar la vista después del cambio
                 self.update_view(self.parent.renders())
 
-                log.info(
-                    f"Updated {render.name()} to version {selected_render.int_version()}"
-                )
-            else:
-                log.warning("No se pudieron aplicar los cambios")
-        else:
-            log.debug("Diálogo cancelado por el usuario")
+        log.info(f"Updated {render.name()} to version {render.int_version()}")
 
     def _add_menu_action(self, icon: str, text: str):
         """creates menu action and adds to menu"""
@@ -148,21 +163,6 @@ class RendersView:
         """opens render layers location on explorer"""
         if self.rl:
             browse_folder(self.rl.path())
-
-    def edit_callback(self):
-        """editar render seleccionado"""
-        selection = self.get_view_selection()
-        if not selection:
-            log.warning("Nothing Selected!")
-            return
-
-        if len(selection) > 1:
-            log.warning("Select only one render to edit!")
-            return
-
-        render = selection[0]
-        log.debug(f"Edit callback: {render}")
-        self.open_edit_dialog(render)
 
     def get_last_version(self, renders):
         """Get the latest version of each render class from a collection of renders.

@@ -3,15 +3,15 @@
 # Maximiliano Rocamora / Milton Maguna
 # ----------------------------------------------------------------------------------------
 from qt_log.stream_log import get_stream_logger
-from render_manager.render.render_layer_types import Render
-from render_manager.render.libs.helpers.backdrops import (
+from rm2.render_manager.render.render_layer_types import Render
+from rm2.render_manager.render.libs.helpers.backdrops import (
     create_backdrop_container,
     create_backdrop_subcontainer,
     get_next_row_container,
     get_next_row_subcontainer,
 )
 
-log = get_stream_logger("RenderManager")
+log = get_stream_logger("RenderManager - Create Reads for RenderLayer")
 
 
 class Create:

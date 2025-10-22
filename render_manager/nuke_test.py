@@ -1,14 +1,5 @@
 import sys
 
-repo_test2 = r"D:\repo\rm2"
-repo_test3 = r"D:\repo"
-sys.path.append(repo_test2)
-nuke.pluginAddPath(repo_test2)
-sys.path.append(repo_test3)
-nuke.pluginAddPath(repo_test3)
-
-import sys
-
 for name in list(sys.modules.keys()):
     for pack in ["rm2"]:
         if name.startswith(pack):
@@ -16,5 +7,7 @@ for name in list(sys.modules.keys()):
             del sys.modules[name]
             del name
 
-# from rm2.render_manager.main import run_test
-# run_test()
+from rm2.render_manager.main import run_test
+
+run_test()
+
