@@ -47,6 +47,25 @@ class RendersView:
         self.model.renders = self.get_last_version(renders)
         self.model.layoutChanged.emit()
 
+    def update_render_in_view(self, old_render, new_render):
+        """Update a specific render in the view without reloading all data"""
+        # Find the render in the current model data
+        for i, render in enumerate(self.model.renders):
+            if render.name() == old_render.name():
+                # Replace the old render with the new one
+                self.model.renders[i] = new_render
+
+                # Notify the model that this specific row has changed
+                top_left = self.model.index(i, 0)
+                bottom_right = self.model.index(i, self.model.columnCount(None) - 1)
+                self.model.dataChanged.emit(top_left, bottom_right)
+
+                log.debug(f"Updated render {new_render.name()} in view at row {i}")
+                return True
+
+        log.warning(f"Could not find render {old_render.name()} in current view")
+        return False
+
     def get_view_selection(self):
         """returns list of selected render_layers"""
         indexes = self.ui.table_view.selectionModel().selectedRows()
@@ -99,7 +118,7 @@ class RendersView:
             return
 
         render = selection[0]
-        log.debug(f"Version selector callback: {render}")
+        # log.debug(f"Version selector callback: {render}")
         selected_render = self.open_version_selector_dialog(render)
 
         if selected_render:
@@ -112,22 +131,42 @@ class RendersView:
     def open_version_selector_dialog(self, render):
         """Abrir diálogo para seleccionar versión sin modificar el render original"""
 
+        log.debug(f"OPENING DIALOG: Original render version: {render.int_version()}")
         dialog = EditRenderDialog(render, self.parent.renders(), None)
         if dialog.exec_() == QDialog.Accepted:
             # Aplicar cambios de forma segura DESPUÉS de cerrar el diálogo
-            changes_applied = dialog.apply_changes_safely()
+            success, selected_render = dialog.apply_changes_safely()
 
-            if changes_applied:
-                log.debug(f"Nueva versión: {render.int_version()}")
-                log.debug(f"Nuevo usuario: {render.user()}")
-                log.debug(f"Nuevo progreso: {render.progress_bar()}")
-                log.debug(f"Nuevos frames: {render.frame_range()}")
-                log.debug(f"Nueva ruta: {render.path()}")
+            if success and selected_render:
+                log.debug(
+                    f"AFTER DIALOG: Original render version: {render.int_version()}"
+                )
+                log.debug(
+                    f"AFTER DIALOG: Selected render version: {selected_render.int_version()}"
+                )
+                log.debug(f"Nueva versión: {selected_render.int_version()}")
+                log.debug(f"Nuevo usuario: {selected_render.user()}")
+                log.debug(f"Nuevos frames: {selected_render.frame_range()}")
+                log.debug(f"Nueva ruta: {selected_render.path()}")
 
-                # Actualizar la vista después del cambio
-                self.update_view(self.parent.renders())
+                log.info(
+                    f"Updated {selected_render.name()} to version {selected_render.int_version()}"
+                )
 
-        log.info(f"Updated {render.name()} to version {render.int_version()}")
+                # Actualizar solo el render específico en la vista
+                if self.update_render_in_view(render, selected_render):
+                    log.debug("View updated successfully")
+                else:
+                    log.warning("Failed to update view, falling back to full reload")
+                    self.update_view(self.parent.renders())
+
+                return selected_render
+            else:
+                log.warning("Error applying changes to selected version")
+                return None
+        else:
+            log.info("Version selection cancelled")
+            return None
 
     def _add_menu_action(self, icon: str, text: str):
         """creates menu action and adds to menu"""
