@@ -95,6 +95,7 @@ class Render:
         Eg: LGT_KAF_010
         """
         return self.version().rsplit("_", 1)[0]
+        
 
     def aovs(self) -> list:
         """returns the list of aovs names for this render layer
