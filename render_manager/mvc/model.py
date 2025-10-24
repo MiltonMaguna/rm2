@@ -40,11 +40,11 @@ class RenderTableModel(QAbstractTableModel):
 
         render = self.renders[index.row()]
 
-        # ColorRole for Sync Status
-        if role == Qt.ForegroundRole and index.column():
+        # ColorRole for Sync Status and Render Roles
+        if role == Qt.ForegroundRole:
+            # Status column gets specific status colors
             if index.column() == 4:
                 return self.STATUS_COLOR[render.status()]
-
             return QColor(230, 230, 230)
 
         # ToolTip role for ABC versions column
