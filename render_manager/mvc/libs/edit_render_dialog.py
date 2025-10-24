@@ -170,12 +170,14 @@ class EditRenderDialog(QDialog):
     def select_version(self):
         """Seleccionar la versión elegida"""
         if self.selected_version:
-            # En lugar de modificar self.render, simplemente asignamos la versión seleccionada
-            self.render = self.selected_version
+            # NO modificar self.render, solo guardamos la versión seleccionada
             log.info(
-                f"Selected version: {self.render.name()} v{self.render.int_version()}"
+                f"Selected version: {self.selected_version.name()} v{self.selected_version.int_version()}"
             )
             self.accept()
+        else:
+            log.warning("No version selected")
+            self.reject()
 
     def apply_changes_safely(self):
         """Aplica los cambios de forma segura después de cerrar el diálogo.
@@ -200,7 +202,6 @@ class EditRenderDialog(QDialog):
                 f"Render seleccionado: {self.selected_version.name()} v{self.selected_version.int_version()}"
             )
             log.debug(f"Usuario: {self.selected_version.user()}")
-            log.debug(f"Progreso: {self.selected_version.progress_bar()}")
             log.debug(f"Frames: {self.selected_version.frame_range()}")
             log.debug(f"Path: {self.selected_version.path()}")
 
