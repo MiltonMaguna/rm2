@@ -318,7 +318,24 @@ def get_json_data(path: str) -> dict:
 
         if not json_files:
             log.warning(f"No JSON files found in directory: {path}")
-            return None
+            return {
+                "_about": {"package": "python-backpack", "version": "1.1.4"},
+                "arcane": [
+                    "STRING arcane_project No Proyect",
+                    "INT arcane_project_id 00",
+                    "STRING arcane_path G:\\",
+                    "STRING arcane_entity_type shot",
+                    "STRING references []",
+                ],
+                "system": {
+                    "PC": "",
+                    "User": "John Doe",
+                    "app": "maya.exe",
+                    "name": "RND_XX_MAIN_BTY",
+                    "python_version": "3.7.7 (tags/v3.7.7:d7c567b08f, Mar 10 2020, 10:41:24) [MSC v.1900 64 bit (AMD64)]",
+                    "time": {},
+                },
+            }
 
         if len(json_files) > 1:
             log.warning(
