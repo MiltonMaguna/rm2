@@ -23,5 +23,5 @@ for name in list(sys.modules.keys()):
             del sys.modules[name]
 
 
-from rm2.render_manager.main import run
+from RenderManager2.render_manager2.main import run
 run()
