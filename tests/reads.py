@@ -6,8 +6,8 @@ for name in list(sys.modules.keys()):
             print('removing module', name)
             del sys.modules[name]
 
-from rm2.render_manager.mocks.mocked_render_layer import render_layer_bg_rzk
-from rm2.render_manager.render.libs.helpers.reads import create_all_aovs
+from RenderManager2.render_manager2.mocks.mocked_render_layer import render_layer_bg_rzk
+from RenderManager2.render_manager2.render.libs.helpers.reads import create_all_aovs
 create_all_aovs(render_layer_bg_rzk)
 
 """

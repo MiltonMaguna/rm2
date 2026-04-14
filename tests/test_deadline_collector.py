@@ -1,19 +1,19 @@
-from rm2.render_manager.core.dl_collector_job.deadline_collector import (
+from RenderManager2.render_manager2.core.dl_collector_job.deadline_collector import (
     collect_render_layers_from_deadline,
 )
 import json
 
-# json_file_path = r'D:\repo\rm2\tests\test_data\jobs_UAS_1410_MayaBatch.json'
-json_file_path = r"D:\repo\rm2\tests\test_data\jobs_KIT_0070_MayaBatch.json"
+# json_file_path = r'D:\repo\RenderManager2\tests\test_data\jobs_UAS_1410_MayaBatch.json'
+json_file_path = r'D:\repo\RenderManager2\tests\test_data\jobs_KIT_0070_MayaBatch.json'
 
 
 def test_render_collector_manually():
     """Test RenderCollector manually"""
-    print("\n🧪 Testing RenderCollector")
-    print("=" * 30)
+    print('\n🧪 Testing RenderCollector')
+    print('=' * 30)
 
     try:
-        with open(json_file_path, "r", encoding="utf-8") as f:
+        with open(json_file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
         # Collect render layers
@@ -21,11 +21,11 @@ def test_render_collector_manually():
 
         # print(f"✅ Collected {len(render_layers)} render layers:")
         for rol in render_layers.keys():
-            print(f"Render Layer: {rol}")
+            print(f'Render Layer: {rol}')
 
             for layer in render_layers[rol]:
                 # print(f"Full Name: {layer.full_name()}")
-                print(f"Int Version: {layer.int_version()}")
+                print(f'Int Version: {layer.int_version()}')
                 # print(f"Rol Main: {layer.rol_main()}")
                 # print(f"Rol layer: {layer.rol_layer()}")
                 # print(f"Name:{layer.name()}")
@@ -39,7 +39,7 @@ def test_render_collector_manually():
                 # print('-'*30)
 
     except ImportError:
-        print("❌ ImportError: RenderCollector module not found.")
+        print('❌ ImportError: RenderCollector module not found.')
 
 
 test_render_collector_manually()

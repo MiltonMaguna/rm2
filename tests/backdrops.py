@@ -6,8 +6,8 @@ for name in list(sys.modules.keys()):
             print('removing module', name)
             del sys.modules[name]
 
-from rm2.render_manager.mocks.mocked_render_layer import render_layer_bg, render_layer_fg
-from rm2.render_manager.render.libs.helpers.backdrops import (get_next_row_container,
+from RenderManager2.render_manager2.mocks.mocked_render_layer import render_layer_bg, render_layer_fg
+from RenderManager2.render_manager2.render.libs.helpers.backdrops import (get_next_row_container,
                                                         get_next_row_subcontainer,
                                                         create_backdrop_container,
                                                         create_backdrop_subcontainer)
