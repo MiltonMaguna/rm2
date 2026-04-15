@@ -208,33 +208,36 @@ def check_for_files_exr(folder_path: str) -> bool:
 
 
 def check_for_empty_subfolders(folder_path: str) -> bool:
-    """OPTIMIZED: Check if a folder and all its subfolders are empty.
+    """Check if a version folder should be skipped.
 
-    Stops at first .exr file found instead of checking everything.
+    Checks the 'beauty' subfolder specifically if it exists.
+    If 'beauty' is empty or missing, the version is considered invalid.
+    Falls back to checking all subfolders if 'beauty' is not present.
 
     Args:
-        folder_path (str): Path to the folder.
+        folder_path (str): Path to the version folder.
 
     Returns:
-        bool: True if the folder and all its subfolders are empty, False otherwise.
+        bool: True if the folder should be skipped (empty/invalid), False if valid.
     """
     try:
-        contents = os.listdir(folder_path)
+        beauty_path = os.path.join(folder_path, 'beauty')
 
-        # full empty folder case
+        if os.path.isdir(beauty_path):
+            return check_for_files_exr(beauty_path)
+
+        # no beauty folder: check all subfolders
+        contents = os.listdir(folder_path)
         if not contents:
             return True
 
-        # Quick check: iterate through contents and stop at first .exr file
         for item in contents:
             item_path = os.path.join(folder_path, item)
-
             if os.path.isdir(item_path):
-                # Check if this subfolder has .exr files
                 if not check_for_files_exr(item_path):
-                    return False  # Found .exr files, not empty
+                    return False
 
-        return True  # All subfolders are empty
+        return True
 
     except (OSError, FileNotFoundError):
         return True
