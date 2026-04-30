@@ -99,14 +99,16 @@ class RendersView:
         self.menu = QMenu()
         load = self._add_menu_action(':/nuke', 'Load Selected Layers')
         load.triggered.connect(self.parent.load_callback)
+        select_version = self._add_menu_action(':/version', 'Select Version')
+        select_version.triggered.connect(self.version_selector_callback)
         self.menu.addSeparator()
         s_all = self._add_menu_action(':/dot_green_32', 'Select All')
         s_all.triggered.connect(lambda: self.table_view.selectAll())
         s_none = self._add_menu_action(':/dot_red_32', 'Select None')
         s_none.triggered.connect(lambda: self.table_view.clearSelection())
         self.menu.addSeparator()
-        browse = self._add_menu_action(':/nuke', 'Submit to Deadline: Reformat 50%')
-        browse.triggered.connect(self.reformat_callback)
+        # browse = self._add_menu_action(':/nuke', 'Submit to Deadline: Reformat 50%')
+        # browse.triggered.connect(self.reformat_callback)
         constant = self._add_menu_action(':/nuke', 'Init Constant')
         constant.triggered.connect(create_init_constant)
         template = self._add_menu_action(':/nuke', 'CG Template')
@@ -114,8 +116,6 @@ class RendersView:
         browse = self._add_menu_action(':/browse', 'Browse Folder')
         browse.triggered.connect(self.browse_render_layer)
         self.menu.popup(QCursor.pos())
-        select_version = self._add_menu_action(':/version', 'Select Version')
-        select_version.triggered.connect(self.version_selector_callback)
         # select version
 
     def version_selector_callback(self):
