@@ -1,3 +1,4 @@
 
 *.pyc
 %nuke%arcane%dev%RenderManager/chat_history/history.sqlite
+*__pycache__

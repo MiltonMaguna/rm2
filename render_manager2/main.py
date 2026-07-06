@@ -2,17 +2,17 @@
 # RenderManager Nuke
 # Maximiliano Rocamora / Milton Maguna
 # ----------------------------------------------------------------------------------------
-from arcane.core.setenv.decorators import project_setter
+from arcane.core.setenv.decorators import project_setter  # type: ignore
 from plugin.ui.arcane_utils import pipeline_names
 from plugin.ui.loader_nuke import LoaderNuke
 from plugin.ui.Qt import QtCompat
 
 try:
-    from PySide2 import QtCore, QtWidgets
+    from PySide2 import QtCore, QtWidgets  # type: ignore
 
     PYSIDE_VERSION = 2
 except ImportError:
-    from PySide6 import QtCore, QtWidgets
+    from PySide6 import QtCore, QtWidgets  # type: ignore
 
     PYSIDE_VERSION = 6
 
